@@ -4,6 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { User, UserSchema } from 'src/user/schema/user.schema';
+import { UserService } from 'src/user/user.service';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
@@ -13,7 +15,7 @@ import { User, UserSchema } from 'src/user/schema/user.schema';
       signOptions: { expiresIn: '60s' },
     }),
   ],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy, UserService],
   controllers: [AuthController],
 })
 export class AuthModule {}
